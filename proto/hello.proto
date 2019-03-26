@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package greeting;
+
+option go_package = "greetingpb";
+
+// Greeting is an example service
+service Greeting {
+  // Hello greets the user with a hello message
+  rpc Hello(HelloRequest) returns (HelloResponse);
+}
+
+// HelloRequest person to say hello to
+message HelloRequest {
+  string name = 1;
+}
+
+// HelloResponse message saying hello
+message HelloResponse {
+  string greeting = 1;
+}

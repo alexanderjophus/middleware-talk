@@ -1,0 +1,39 @@
+gRPC Middleware
+Golang Bristol
+28 Mar 2019
+Tags: grpc, middleware, masking
+
+Alexander Joseph Trelore
+Software Engineer, Tumelo
+alex@tumelo.com
+@AlexanderJophus
+
+* Introduction
+
+.background backgroundBottom.svg
+- Cover gRPC basics
+- Motivation of middleware
+- Example run through
+- Questions
+
+* Example - Proto
+
+.code proto/hello.proto
+
+* Example - Service implementation 
+
+.code hello.go /START SERVER/,/END SERVER/
+
+* Example - cont.
+
+.play -edit hello.go /START OMIT/,/END OMIT/
+
+* Motivation
+
+: Presenter notes (first paragraph)
+- Authentication
+- Error Masking
+- Logging
+- Monitoring
+- Retries
+- Recovery
