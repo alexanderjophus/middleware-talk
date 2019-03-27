@@ -24,19 +24,19 @@ func (s S) Hello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloResponse, e
 
 // START OMIT
 func main() {
-	serverAddress := "127.0.0.1:8900"
-	grpcServer := grpc.NewServer()
-	s := S{}
-	pb.RegisterGreetingServer(grpcServer, s)
-	l, _ := net.Listen("tcp", serverAddress)
-	go grpcServer.Serve(l)
+	serverAddress := "127.0.0.1:8900"        // HL1
+	grpcServer := grpc.NewServer()           // HL1
+	s := S{}                                 // HL1
+	pb.RegisterGreetingServer(grpcServer, s) // HL1
+	l, _ := net.Listen("tcp", serverAddress) // HL1
+	go grpcServer.Serve(l)                   // HL1
 
-	conn, _ := grpc.Dial(serverAddress, grpc.WithInsecure())
-	c := pb.NewGreetingClient(conn)
+	conn, _ := grpc.Dial(serverAddress, grpc.WithInsecure()) // HL2
+	c := pb.NewGreetingClient(conn)                          // HL2
 
-	resp, err := c.Hello(context.Background(), &pb.HelloRequest{Name: "Alexander"})
-	fmt.Printf("response: %v\n", resp)
-	fmt.Printf("error:    %v\n", err)
+	resp, err := c.Hello(context.Background(), &pb.HelloRequest{Name: "Alexander"}) // HL3
+	fmt.Printf("response: %v\n", resp)                                              // HL3
+	fmt.Printf("error:    %v\n", err)                                               // HL3
 }
 
 // END OMIT

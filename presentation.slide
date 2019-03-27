@@ -7,33 +7,74 @@ Alexander Joseph Trelore
 Software Engineer, Tumelo
 alex@tumelo.com
 @AlexanderJophus
+https://github.com/trelore/
 
 * Introduction
 
-.background backgroundBottom.svg
+: Ask about understanding of gRPC, middleware
 - Cover gRPC basics
 - Motivation of middleware
 - Example run through
 - Questions
 
-* Example - Proto
+* What is gRPC?
 
+: comparison to json, compiled way of sending messages, tooling around it, definable contracts
+picture here + one liner
+
+* What can I use gRPC with?
+
+: prototots?
+picture here of all languages using it
+
+* Simple Example - Definition
+
+: Explain the contract we have described; service, rpc, messages
 .code proto/hello.proto
 
-* Example - Service implementation 
+* Simple Example - Implementation
 
-.code hello.go /START SERVER/,/END SERVER/
+: Explain that this implements the proto defined earlier, this example is just going to say hello to people
+.code 1.slide/hello.go /START SERVER/,/END SERVER/
 
-* Example - cont.
+* Simple Example - Usage (run server)
 
-.play -edit hello.go /START OMIT/,/END OMIT/
+: Setting up the server
+.code 1.slide/hello.go /START OMIT/,/END OMIT/ HL1
 
-* Motivation
+* Simple Example - Usage (run client)
 
-: Presenter notes (first paragraph)
+: Setting up the client
+.code 1.slide/hello.go /START OMIT/,/END OMIT/ HL2
+
+* Simple Example - Usage (make call)
+
+: Calling the code
+.play -edit 1.slide/hello.go /START OMIT/,/END OMIT/ HL3
+
+* Middleware Motivation
+ 
 - Authentication
 - Error Masking
 - Logging
 - Monitoring
 - Retries
 - Recovery
+
+* Introducing the problem
+
+.code 2.slide/hello.go /START SERVER/,/END SERVER/ HL1
+
+* Introducing the problem - cont.
+
+.play -edit 2.slide/hello.go /START OMIT/,/END OMIT/
+
+* Introducting the solution
+
+.code mask/mask.go /START OMIT/,/END OMIT/
+
+* Using the solution
+
+: put 'codes.Internal' in the mask interceptor
+.play -edit 3.slide/hello.go /START OMIT/,/END OMIT/
+
