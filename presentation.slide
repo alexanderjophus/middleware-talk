@@ -12,20 +12,21 @@ https://github.com/trelore/
 * Introduction
 
 : Ask about understanding of gRPC, middleware
-- Cover gRPC basics
-- Motivation of middleware
+- What is gRPC?
+- What issues could we face?
+- What is middleware?
 - Example run through
 - Questions
 
 * What is gRPC?
 
-: comparison to json, compiled way of sending messages, tooling around it, definable contracts
-picture here + one liner
+* 
 
-* What can I use gRPC with?
-
-: prototots?
-picture here of all languages using it
+: comparison to REST, compiled way of sending messages, tooling around it, definable contracts
+: usable with C++, Go, Java, Python, Ruby, C#, Node.js are in GA and follow semantic versioning
+: community support for other languages
+.image assets/grpc-logo.png _ 250
+A high-performance, open-source universal RPC framework
 
 * Simple Example - Definition
 
@@ -35,46 +36,79 @@ picture here of all languages using it
 * Simple Example - Implementation
 
 : Explain that this implements the proto defined earlier, this example is just going to say hello to people
-.code 1.slide/hello.go /START SERVER/,/END SERVER/
+.code what.slide/hello.go /START SERVER/,/END SERVER/
 
 * Simple Example - Usage (run server)
 
 : Setting up the server
-.code 1.slide/hello.go /START OMIT/,/END OMIT/ HL1
+.code what.slide/hello.go /START OMIT/,/END OMIT/ HL1
 
 * Simple Example - Usage (run client)
 
 : Setting up the client
-.code 1.slide/hello.go /START OMIT/,/END OMIT/ HL2
+.code what.slide/hello.go /START OMIT/,/END OMIT/ HL2
 
 * Simple Example - Usage (make call)
 
 : Calling the code
-.play -edit 1.slide/hello.go /START OMIT/,/END OMIT/ HL3
+.play -edit what.slide/hello.go /START OMIT/,/END OMIT/ HL3
 
-* Middleware Motivation
+* Issues
  
 - Authentication
 - Error Masking
 - Logging
 - Monitoring
+- Tracing
 - Retries
 - Recovery
+- Rate Limiting
+
+* Naive Approach
+
+.code naive.slide/hello.go /START SERVER/,/END SERVER/
+
+* Introducing Middleware
+
+Code that is ran on a server either before or after a function call.
+
+- Scalable to number of functions
+- Scalable middleware through interfaces
+
+* Our problem
 
 * Introducing the problem
 
-.code 2.slide/hello.go /START SERVER/,/END SERVER/ HL1
+: we had pen test, we wanted to mask errors to avoid easy exploits
+.code problem.slide/hello.go /START SERVER/,/END SERVER/ HL1
 
 * Introducing the problem - cont.
 
-.play -edit 2.slide/hello.go /START OMIT/,/END OMIT/
+.play -edit problem.slide/hello.go /START OMIT/,/END OMIT/
 
-* Introducting the solution
+* Go gRPC Middleware
+
+* Useful links
+
+.link https://github.com/grpc/grpc-go/blob/master/interceptor.go#L60 Middleware interface
+.link https://github.com/grpc-ecosystem/go-grpc-middleware Preimplemented middleware
+.link https://github.com/tumelohq/grpc-mask Tumelo's mask (WIP)
+
+* Error Mask
 
 .code mask/mask.go /START OMIT/,/END OMIT/
 
 * Using the solution
 
 : put 'codes.Internal' in the mask interceptor
-.play -edit 3.slide/hello.go /START OMIT/,/END OMIT/
+.play -edit solution.slide/hello.go /START OMIT/,/END OMIT/
 
+* Summary
+
+: Ask about understanding of gRPC, middleware
+- What is gRPC?
+- What issues could we face?
+- What is middleware?
+- Example run through
+
+* Questions?

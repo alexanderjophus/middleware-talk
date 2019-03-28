@@ -15,7 +15,6 @@ func UnaryServerInterceptor(cs ...codes.Code) grpc.UnaryServerInterceptor {
 		_ *grpc.UnaryServerInfo,
 		handler grpc.UnaryHandler,
 	) (interface{}, error) {
-
 		resp, err := handler(ctx, req) // HL
 		if err != nil {                // HL
 			errCode := status.Code(err) // HL
@@ -27,7 +26,6 @@ func UnaryServerInterceptor(cs ...codes.Code) grpc.UnaryServerInterceptor {
 			return nil, err // HL
 		} // HL
 		return resp, nil // HL
-
 	}
 }
 
